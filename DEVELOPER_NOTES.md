@@ -1,56 +1,30 @@
-
-
-
-
 ## Table of contents
 
-- [Introduction](#1-introduction)
+Sure, here's the generated table of contents based on your text:
+
+- [1. Introduction](#1-introduction)
     - [What is Bittensor?](#what-is-bittensor)
     - [What is the purpose of Bittensor?](#what-is-the-purpose-of-bittensor)
-- [Architecture](#2-architecture)
+- [2. Architecture](#2-architecture)
     - [Overview of Bittensor's architecture](#overview-of-bittensors-architecture)
     - [How the different components interact?](#how-the-different-components-interact)
-- [Main Components](#3-main-components)
+- [3. Main Components](#3-main-components)
+    - [Bittensor Protocol](#bittensor-protocol)
     - [Wallet](#wallet)
     - [Neurons](#neurons)
     - [Subtensor](#subtensor)
     - [Metagraph](#metagraph)
-- [Developer Notes](#4-developer-notes)
-    - [Coding Standards](#coding-standards)
-        - [Coding Style](#coding-style)
-        - [Git Commit style](#git-commit-style)
-            - [1. Atomic Commits](#1-atomic-commits)
-            - [2. Separate subject from body with a blank line](#2-separate-subject-from-body-with-a-blank-line)
-            - [3. Limit the subject line to 50 characters](#3-limit-the-subject-line-to-50-characters)
-            - [4. Use the imprative mood in the subject line](#4-use-the-imperative-mood-in-the-subject-line)
-            - [5. Wrap the body at 72 characters](#5-wrap-the-body-at-72-characters)
-            - [6. Use the body to explain what and why vs. how](#6-use-the-body-to-explain-what-and-why-vs-how)
-    - [Debug](#debug)
-        - [Installation](#installation)
-        - [Wallets](#wallets)
-        - [Querying the Network](#querying-the-network)
-        - [Debugging Miners](#debugging-miners)
-        - [Debugging Validators](#debugging-validators)
-        - [Debugging with the Bittensor package](#debugging-with-the-bittensor-package)
-    - [Testing](#testing)
-        - [Running Tests](#running-tests)
-        - [Writing Tests](#writing-tests)
-        - [Mocking](#mocking)
-        - [Test Coverage](#test-coverage)
-        - [Continuous Integration](#continuous-integration)
-    - [Development Workflow](#development-workflow)
-        - [Main branches](#main-branches)
-        - [Development model](#development-model)
-            - [Feature branches](#feature-branches)
-            - [Release branches](#release-branches)
-            - [Hotfix branches](#hotfix-branches)
-            - [Git operations](#git-operations)
-            - [Create a feature branch](#create-a-feature-branch)
-            - [Merge feature branch into staging](#merge-feature-branch-into-staging)
-            - [Create release branch](#create-release-branch)
-            - [Finish a release branch](#finish-a-release-branch)
-            - [Create the hotfix branch](#create-the-hotfix-branch)
-            - [Finishing a hotfix branch](#finishing-a-hotfix-branch)
+- [4. Preliminary Developer Notes](#4-preliminary-developer-notes)
+    - [Project Structure](#project-structure)
+    - [Tests](#tests)
+    - [Scripts](#scripts)
+- [5. Comprehensive Developer Notes](#5-comprehensive-developer-notes)
+    - [Notes for Python Script Style](#notes-for-python-script-style)
+    - [Notes for Source Coding](#notes-for-source-coding)
+    - [Notes for Commit](#notes-for-commit)
+    - [Notes for Pull Request](#notes-for-pull-request)
+    - [Notes for Releasing](#notes-for-releasing)
+    - [Notes for Logging](#notes-for-logging)
 
 # 1. Introduction
 ### What is Bittensor?
@@ -90,7 +64,7 @@ Subtensor is a lower-level protocol that handles communication between neurons. 
 
 The Metagraph is a decentralized ledger that keeps track of the state of the Bittensor network. It records which neurons are part of the network and how they are connected.
 
-# 4. General Developer Notes
+# 4. Preliminary Developer Notes
 
 Project Structure
 -------------------
@@ -125,7 +99,7 @@ Scripts
 - Install Scripts: Describe how to install the software. Include information about its requirements and installation options.
 
 - Test Scripts: Describe how to test the software. Include information about its test suite and test options.
-# 5. Detailed Developer Notes
+# 5. Comprehensive Developer Notes
 
 
 Notes for Python Script Style
