@@ -53,469 +53,309 @@
             - [Finishing a hotfix branch](#finishing-a-hotfix-branch)
 
 # 1. Introduction
-What is Bittensor?
-----------------------
+### What is Bittensor?
 Bittensor is an open-source project that aims to create a decentralized network for AI model training. It allows AI models to learn from each other in a decentralized manner, improving their performance and capabilities.
 
-What is the purpose of Bittensor?
-----------------------
+### What is the purpose of Bittensor?
+
 The purpose of Bittensor is to democratize AI model training. By creating a decentralized network, it allows anyone to contribute to the training of AI models and benefit from their use.
 
 # 2. Architecture
-Overview of Bittensor's architecture
----------------
+### Overview of Bittensor's architecture
+
 Bittensor's architecture consists of several key components, including the Bittensor protocol, the wallet, neurons, subtensor, and the Metagraph. These components work together to create a decentralized network for AI model training.
 
-How the different components interact?
-------
+### How the different components interact?
+
 Neurons in the Bittensor network interact with the Metagraph, a decentralized ledger that keeps track of the state of the network. The wallet is used to manage the tokens that are used for incentives in the network. The subtensor is a lower-level protocol that handles communication between neurons.
 
 # 3. Main Components
-Bittensor Protocol
---------------------------
+### Bittensor Protocol
+
 The Bittensor protocol is the backbone of the network. It defines how neurons communicate with each other and with the Metagraph.
 
-Wallet
------------------
+### Wallet
+
 The wallet is used to manage the Bittensor tokens that are used as incentives in the network. It allows users to earn tokens for contributing to the training of AI models and spend tokens to use trained models.
 
-Neurons
-------------------
+### Neurons
+
 Neurons are the nodes in the Bittensor network. They represent AI models that are learning from the network.
 
-Subtensor
---------------------
+### Subtensor
+
 Subtensor is a lower-level protocol that handles communication between neurons. It ensures that data is transfered securely and efficiently across the network.
 
-Metagraph
--------------------
+### Metagraph
+
 The Metagraph is a decentralized ledger that keeps track of the state of the Bittensor network. It records which neurons are part of the network and how they are connected.
 
-# 4. Developer Notes
+# 4. General Developer Notes
+
+Project Structure
+-------------------
+Typically, a project may have the following structure:
+
+- Root Directory: Contains configuration files, README, LICENSE, and other metadata files.
+
+- Source Directory (src/): Contains the source code of the project.
+
+- Test Directory (tests/): Contains unit tests, integration tests, and other test code.
+
+- Docs Directory (docs/): Contains documentation files.
+
+- Scripts Directory (scripts/): Contains scripts for various tasks such as building, installing, testing, etc.
+
+- Lib Directory (lib/): Contains libraries and dependencies.
+
+- Bin Directory (bin/): Contains binary files.
+
+Tests
+---------
+- Unit Tests: Describe the purpose of each unit test. Include information about what part of the code it tests and what the expected results are.
+
+- Integration Tests: Describe the purpose of each integration test. Include information about what parts of the code it tests together and what the expected results are.
+
+For more details for testing, please see [here](#)
+
+Scripts
+--------------------
+- Build Scripts: Describe how to build the software. Include information about its dependencies and build options.
+
+- Install Scripts: Describe how to install the software. Include information about its requirements and installation options.
+
+- Test Scripts: Describe how to test the software. Include information about its test suite and test options.
+# 5. Detailed Developer Notes
 
 
-Coding Standards
+Notes for Python Script Style
 ------------------
 
-### Coding Style
-Use `black` to format your python code before commiting for consistency across such a large pool of contributors. Black's code [style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#code-style) ensures consistent and opinionated code formatting. It automatically formats your Python code according to the Black style guide, enhancing code readability and maintainability.
+### 1. General Coding Style
+Python's official style guide is PEP 8, which provides conventions for writing code for the main Python distribution. Here are some key points:
 
-Key Features of Black:
+- `Indentation:` Use 4 spaces per indentation level.
 
-    Consistency: Black enforces a single, consistent coding style across your project, eliminating style debates and allowing developers to focus on code logic.
+- `Line Length:` Limit all lines to a maximum of 79 characters.
 
-    Readability: By applying a standard formatting style, Black improves code readability, making it easier to understand and collaborate on projects.
+- `Blank Lines:` Surround top-level function and class definitions with two blank lines. Method definitions inside a class are surrounded by a single blank line.
 
-    Automation: Black automates the code formatting process, saving time and effort. It eliminates the need for manual formatting and reduces the likelihood of inconsistencies.
+- `Imports:` Imports should usually be on separate lines and should be grouped in the following order:
 
-### Git Commit Style
+    - Standard library imports.
+    - Related third party imports.
+    - Local application/library specific imports.
+- `Whitespace:` Avoid extraneous whitespace in the following situations:
 
-Here’s a model Git commit message when contributing:
-```
-Summarize changes in around 50 characters or less
-More detailed explanatory text, if necessary. Wrap it to about 72
-characters or so. In some contexts, the first line is treated as the
-subject of the commit and the rest of the text as the body. The
-blank line separating the summary from the body is critical (unless
-you omit the body entirely); various tools like `log`, `shortlog`
-and `rebase` can get confused if you run the two together.
-Explain the problem that this commit is solving. Focus on why you
-are making this change as opposed to how (the code explains that).
-Are there side effects or other unintuitive consequences of this
-change? Here's the place to explain them.
-Further paragraphs come after blank lines.
- - Bullet points are okay, too
- - Typically a hyphen or asterisk is used for the bullet, preceded
-   by a single space, with blank lines in between, but conventions
-   vary here
-If you use an issue tracker, put references to them at the bottom,
-like this:
-Resolves: #123
-See also: #456, #789
-```
-#### 1. Atomic Commits
-An “atomic” change revolves around one task or one fix.
+    - Immediately inside parentheses, brackets or braces.
+    - Immediately before a comma, semicolon, or colon.
+    - Immediately before the open parenthesis that starts the argument list of a function call.
+- `Comments:` Comments should be complete sentences and should be used to clarify code and are not a substitute for poorly written code.
 
-Atomic Approach
- - Commit each fix or task as a separate change
- - Only commit when a block of work is complete
- - Commit each layout change separately
- - Joint commit for layout file, code behind file, and additional resources
-
-Benefits
-
-- Easy to roll back without affecting other changes
-- Easy to make other changes on the fly
-- Easy to merge features to other branches
-
-*Caveat*: When working with new features, an atomic commit will often consist of multiple files, since a layout file, code behind file, and additional resources may have been added/modified. You don’t want to commit all of these separately, because if you had to roll back the application to a state before the feature was added, it would involve multiple commit entries, and that can get confusing.
-
-#### 2. Separate subject from body with a blank line
-
-Not every commit requires both a subject and a body. Sometimes a single line is fine, especially when the change is so simple that no further context is necessary. 
-
-For example:
-
-    Fix typo in introduction to user guide
-
-Nothing more need be said; if the reader wonders what the typo was, she can simply take a look at the change itself, i.e. use     git show or git diff or git log -p.
-
-If you’re committing something like this at the command line, it’s easy to use the -m option to git commit:
-
-    $ git commit -m"Fix typo in introduction to user guide"
-
-However, when a commit merits a bit of explanation and context, you need to write a body. For example:
-
-    Derezz the master control program
-
-    MCP turned out to be evil and had become intent on world domination.
-    This commit throws Tron's disc into MCP (causing its deresolution)
-    and turns it back into a chess game.
-
-Commit messages with bodies are not so easy to write with the -m option. You’re better off writing the message in a proper text editor. [See Pro Git](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration).
-
-In any case, the separation of subject from body pays off when browsing the log. Here’s the full log entry:
-
-    $ git log
-    commit 42e769bdf4894310333942ffc5a15151222a87be
-    Author: Kevin Flynn <kevin@flynnsarcade.com>
-    Date:   Fri Jan 01 00:00:00 1982 -0200
-
-     Derezz the master control program
-
-     MCP turned out to be evil and had become intent on world domination.
-     This commit throws Tron's disc into MCP (causing its deresolution)
-     and turns it back into a chess game.
+You can see the detailed coding style at [here](#style.md/code-style)
 
 
-#### 3. Limit the subject line to 50 characters
-50 characters is not a hard limit, just a rule of thumb. Keeping subject lines at this length ensures that they are readable, and forces the author to think for a moment about the most concise way to explain what’s going on.
+### 2. Naming Conventions
 
-GitHub’s UI is fully aware of these conventions. It will warn you if you go past the 50 character limit. Git will truncate any subject line longer than 72 characters with an ellipsis, thus keeping it to 50 is best practice.
+- `Classes:` Class names should normally use the CapWords Convention.
+- `Functions and Variables:` Function names should be lowercase, with words separated by underscores as necessary to improve readability. Variable names follow the same convention as function names.
 
-#### 4. Use the imperative mood in the subject line
-Imperative mood just means “spoken or written as if giving a command or instruction”. A few examples:
+- `Constants:` Constants are usually defined on a module level and written in all capital letters with underscores separating words.
 
-    Clean your room
-    Close the door
-    Take out the trash
+- `Non-public Methods and Instance Variables:` Use a single leading underscore (_). This is a weak "internal use" indicator.
 
-Each of the seven rules you’re reading about right now are written in the imperative (“Wrap the body at 72 characters”, etc.).
+- `Strongly "private" methods and variables:` Use a double leading underscore (__). This triggers name mangling in Python.
 
-The imperative can sound a little rude; that’s why we don’t often use it. But it’s perfect for Git commit subject lines. One reason for this is that Git itself uses the imperative whenever it creates a commit on your behalf.
+### 3. Python Code
 
-For example, the default message created when using git merge reads:
+- `List Comprehensions:` Use list comprehensions for concise and readable creation of lists.
 
-    Merge branch 'myfeature'
+- `Generators:` Use generators when dealing with large amounts of data to save memory.
 
-And when using git revert:
+- `Context Managers:` Use context managers (with statement) for resource management.
 
-    Revert "Add the thing with the stuff"
+- `String Formatting:` Use f-strings for formatting strings in Python 3.6 and above.
 
-    This reverts commit cc87791524aedd593cff5a74532befe7ab69ce9d.
+- `Error Handling:` Use exceptions for error handling whenever possible.
 
-Or when clicking the “Merge” button on a GitHub pull request:
+### 4. Documentation
 
-    Merge pull request #123 from someuser/somebranch
+- `Docstrings:` Use docstrings to describe what your classes, methods, and functions do. Docstrings are a type of comment used to explain the purpose of a function, and how it should be used. Here's an example:
 
-So when you write your commit messages in the imperative, you’re following Git’s own built-in conventions. For example:
+```Python
+    def add_numbers(a, b):
+    """
+    This function adds two numbers together.
 
-    Refactor subsystem X for readability
-    Update getting started documentation
-    Remove deprecated methods
-    Release version 1.0.0
-
-Writing this way can be a little awkward at first. We’re more used to speaking in the indicative mood, which is all about reporting facts. That’s why commit messages often end up reading like this:
-
-    Fixed bug with Y
-    Changing behavior of X
-
-And sometimes commit messages get written as a description of their contents:
-
-    More fixes for broken stuff
-    Sweet new API methods
-
-To remove any confusion, here’s a simple rule to get it right every time.
-
-**A properly formed Git commit subject line should always be able to complete the following sentence:**
-
-    If applied, this commit will <your subject line here>
-
-For example:
-
-    If applied, this commit will refactor subsystem X for readability
-    If applied, this commit will update getting started documentation
-    If applied, this commit will remove deprecated methods
-    If applied, this commit will release version 1.0.0
-    If applied, this commit will merge pull request #123 from user/branch
-
-#### 5. Wrap the body at 72 characters
-Git never wraps text automatically. When you write the body of a commit message, you must mind its right margin, and wrap text manually.
-
-The recommendation is to do this at 72 characters, so that Git has plenty of room to indent text while still keeping everything under 80 characters overall.
-
-A good text editor can help here. It’s easy to configure Vim, for example, to wrap text at 72 characters when you’re writing a Git commit.
-
-#### 6. Use the body to explain what and why vs. how
-This [commit](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6) from Bitcoin Core is a great example of explaining what changed and why:
-
-```
-commit eb0b56b19017ab5c16c745e6da39c53126924ed6
-Author: Pieter Wuille <pieter.wuille@gmail.com>
-Date:   Fri Aug 1 22:57:55 2014 +0200
-   Simplify serialize.h's exception handling
-   Remove the 'state' and 'exceptmask' from serialize.h's stream
-   implementations, as well as related methods.
-   As exceptmask always included 'failbit', and setstate was always
-   called with bits = failbit, all it did was immediately raise an
-   exception. Get rid of those variables, and replace the setstate
-   with direct exception throwing (which also removes some dead
-   code).
-   As a result, good() is never reached after a failure (there are
-   only 2 calls, one of which is in tests), and can just be replaced
-   by !eof().
-   fail(), clear(n) and exceptions() are just never called. Delete
-   them.
+    :param a: The first number.
+    :type a: int or float
+    :param b: The second number.
+    :type b: int or float
+    :return: The sum of the two numbers.
+    :rtype: int or float
+    """
+    return a + b
 ```
 
-Take a look at the [full diff](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6) and just think how much time the author is saving fellow and future committers by taking the time to provide this context here and now. If he didn’t, it would probably be lost forever.
+Notes for Source Coding
+-----------------------------
+### 1. Neurons
 
-In most cases, you can leave out details about how a change has been made. Code is generally self-explanatory in this regard (and if the code is so complex that it needs to be explained in prose, that’s what source comments are for). Just focus on making clear the reasons why you made the change in the first place—the way things worked before the change (and what was wrong with that), the way they work now, and why you decided to solve it the way you did.
+#### Class Methods
+-----------------
+The class contains several methods:
 
+`check_config`: This method is a placeholder and currently does nothing.
 
-Debug
+`add_args`: This method adds arguments to the command-line parser. These arguments are used to configure the GPT4All model and the GPT4ALLMiner.
+
+`__init__`: This is the constructor of the class. It initializes the GPT4All model with the configuration provided in the command-line arguments.
+
+`backward`: This method is a placeholder and currently does nothing.
+
+`_process_history`: This is a helper method that processes a list of messages into a string. Each message is a dictionary with a 'role' and 'content'. The 'role' can be 'system', 'assistant', or 'user'.
+
+`forward`: This method processes a list of messages, generates a response using the GPT4All model, and returns the response.
+
+#### Command-line Arguments
+--------------
+This is the note for `gpt4all` script. Other models is similar to this note.
+```bash
+The script accepts several command-line arguments to configure the GPT4All model and the GPT4ALLMiner. These include the path to the pretrained GPT4All model, the number of context tokens, the number of parts to split the model into, the seed, whether to use half-precision for the key/value cache, whether to return logits for all tokens, whether to only load the vocabulary, whether to force the system to keep the model in RAM, whether to use embedding mode only, the number of threads to use, the maximum number of tokens to generate, the temperature for sampling, the top-p value for sampling, the top-k value for sampling, whether to echo the prompt, the last n tokens to penalize, the penalty for repeated tokens, the batch size for prompt processing, and whether to stream the results.
+```
+#### Main Execution
+-----------
+
+```bash
+python3 bittensor/neurons/text/prompting/miners/gpt4all/neuron.py
+    --netuid SUBNETWORK_TARGET_UID
+    --wallet.name YOUR_WALLET_NAME
+    --wallet.hotkey YOUR_HOTKEY_NAME
+    --logging.debug
+```
+
+#### Dependencies
 -------------------
 
-### Installation
+The script depends on the `argparse`, `bittensor`, and `langchain.llms` modules. The `argparse` module is used to handle command-line arguments. The `bittensor` module provides the `BasePromptingMiner` class and various utility functions. The `langchain.llms` module provides the class.
 
-First, make sure you have Bittensor installed correctly. There are three ways to install Bittensor:
+#### License
+---------------
 
-1. Through the installer:
+The script is licensed under the MIT License. The copyright is held by Yuma Rao. The license allows anyone to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to certain conditions.
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/opentensor/bittensor/master/scripts/install.sh)"
-```
+### 2. Metagraph
 
-2. With pip:
+#### Class Methods
+---------------------------
 
-```bash
-pip install bittensor
-```
+The class contains several methods:
 
-3. From source:
+`get_save_dir`: This static method returns the directory path for saving the metagraph based on the network and netuid.
 
-```bash
-git clone https://github.com/opentensor/bittensor.git
-python3 -m pip install -e bittensor/
-```
+`latest_block_path`: This static method returns the path of the latest block in a given directory.
 
-You can test your installation by running:
+`__init__`: This is the constructor of the class. It initializes the metagraph with the given netuid and network. It also has options to use a lite version and to sync the metagraph.
 
-```bash
-python3 -c "import bittensor; print(bittensor.__version__)"
-```
-### Wallets
+`sync`: This method syncs the metagraph with the chain. It can use either a lite version or a full version of the neurons in the chain.
 
-Bittensor uses wallets for identity and ownership. Wallets consist of a coldkey and hotkey. Coldkeys store funds securely and operate functions such as transfers and staking, while hotkeys are used for all online operations such as signing queries, running miners, and validating.
+`save`: This method saves the state of the metagraph to a file.
 
-Here's how to create a wallet using the Python API:
+`load`: This method loads the state of the metagraph from a file.
 
-```python
-import bittensor as bt
-wallet = bt.wallet()
-wallet.create_new_coldkey()
-wallet.create_new_hotkey()
-print(wallet)
-```
+`load_from_path`: This method loads the state of the metagraph from a file at a given path.
 
-### Querying the Network
+#### Properties
+----------------------
 
-You can query the Bittensor network using the Python API. Here's an example of how to do this:
+The class has several properties that represent different aspects of the chain state:
 
-```python
-import bittensor as bt
+`S`: Total stake.
+`R`: Ranks.
+`I`: Incentive.
+`E`: Emission.
+`C`: Consensus.
+`T`: Trust.
+`Tv`: Validator trust.
+`D`: Dividends.
+`B`: Bonds.
+`W`: Weights.
+`hotkeys`: A list of hotkeys for the axons.
+`coldkeys`: A list of coldkeys for the axons.
+`addresses`: A list of IP addresses for the axons.
 
-# Query through the foundation endpoint.
-print(bt.prompt("Heraclitus was a "))
-```
+#### Dependencies
+------------------------
 
-### Debugging Miners
+The script depends on the `os`, `torch`, and `bittensor` modules. The `os` module is used to handle file and directory paths. The `torch` module provides the `torch.nn.Module` class and various tensor operations. The `bittensor` module provides various utility functions and classes.
 
-Miners in Bittensor are incentivized to contribute distinct forms of value determined by the verification mechanism that that subnetwork’s Validators are running. 
+#### License
+---------------
 
-Here's an example of how to register a miner:
+The script is licensed under the MIT License. The copyright is held by Yuma Rao. The license allows anyone to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to certain conditions.
 
-```bash
-btcli register --netuid <subnetwork uid>
-```
+#### Usage
+-------------
 
-Once registered, the miner attains a slot specified by their UID. To view your slot after registration, run the overview command:
+The `metagraph` class can be used to maintain and manipulate the state of a chain in a PyTorch model. It can be saved to a file and loaded from a file for persistence. It can also be synced with the chain to update its state.
 
-```bash
-btcli overview --netuid <subnetwork uid>
-```
+### 3. Subtensor
 
-Registered miners can select from a variety of pre-written miners or write their own using the Python API. Here's an example of how to run a miner:
+This Python script is part of a blockchain system, specifically designed to handle various data structures such as `NeuronInfo`, `NeuronInfoLite`, `PrometheusInfo`, `DelegateInfo`, and `SubnetInfo`. These data classes represent different types of information in the system, including neuron metadata, delegate info, and subnet info.
 
-```bash
-python3 bittensor/neurons/text_prompting/miners/GPT4ALL/neuron.py --netuid 1
-```
+The script also includes methods for encoding and decoding these data structures to and from a serialized format using SCALE encoding, a common choice for blockchain systems.
 
-### Debugging Validators
+Key components of the script include:
 
-Validators in Bittensor are participants who hold TAO. They use a dual proof-of-stake, proof-of-work mechanism called Yuma Consensus. Here's how to stake funds:
+`Custom RPC Type Registry`: This dictionary defines the data structures for various types of information in the system, such as `SubnetInfo`, `DelegateInfo`, `NeuronInfo`, etc. It is used in the decoding process to interpret the serialized data.
 
-```bash
-btcli stake --help
-```
+`ChainDataType Enum`: This enumeration is used to specify the type of data being handled, which can be one of `NeuronInfo`, `SubnetInfo`, `DelegateInfo`, `NeuronInfoLite`, or `DelegatedInfo`.
 
-And here's how to become a delegate available for delegated stake:
+`from_scale_encoding Function`: This function is used to decode data from SCALE format. It uses the `scalecodec` library to handle the decoding process. The function takes a list of integers (the serialized data), the type of data, and flags indicating whether the data is a vector or an option. It returns a dictionary representing the decoded data.
 
-```bash
-btcli nominate --help
-```
+`Data Classes`: The script defines several data classes (`NeuronInfo`, `NeuronInfoLite`, `PrometheusInfo`, `DelegateInfo`, `SubnetInfo`) to represent different types of information in the system. Each class includes a `from_vec_u8` method to create an instance of the class from serialized data, and a `fix_decoded_values` method to correct the format of decoded data.
 
-### Using the CLI
+`ProposalVoteData and ProposalCallData`: These are data structures used for handling proposal data in the system. `ProposalVoteData` is a dictionary that includes information about a proposal's votes, while `ProposalCallData` is a generic call object from the `scalecodec` library.
 
-Bittensor comes with a command-line interface (CLI) called `btcli` that you can use to interact with the network. Here's how to get help on the available commands:
+Please note that this script requires the bittensor and scalecodec libraries, which should be installed and properly configured in your environment.
 
-```bash
-btcli --help
-```
 
-### Debugging with the Bittensor Package
-
-The Bittensor package contains data structures for interacting with the Bittensor ecosystem, writing miners, validators, and querying the network. Here's an example of how to use the Bittensor package to create a wallet, connect to the axon running on slot 10, and send a prompt to this endpoint:
-
-```python
-import bittensor as bt
-
-# Bittensor's wallet maintenance class.
-wallet = bt.wallet()
-
-# Bittensor's chain interface.
-subtensor = bt.subtensor()
-
-# Bittensor's chain state object.
-metagraph = bt.metagraph(netuid=1)
-
-# Instantiate a Bittensor endpoint.
-axon = bt.axon(wallet=wallet, metagraph=metagraph)
-
-# Start servicing messages on the wire.
-axon.start()
-
-# Register this axon on a subnetwork
-subtensor.serve_axon(netuid=1, axon=axon)
-
-# Connect to the axon running on slot 10, use the wallet to sign messages.
-dendrite = bt.text_prompting(keypair=wallet.hotkey, axon=metagraph.axons[10])
-
-# Send a prompt to this endpoint
-dendrite.forward(roles=['user'], messages=['what are you?'])
-```
-
-Remember, debugging involves a lot of trial and error. Don't be discouraged if things don't work right away. Keep trying different things, and don't hesitate to ask for help if you need it.
-
-Testing
--------------------------------
-
-### Running Tests
-
-Bittensor uses `pytest` for running its tests. To run all tests, navigate to the root directory of the Bittensor repository and run:
-
-```bash
-pytest
-```
-
-This will automatically discover all test files (those that start with `test_`) and run them.
-
-If you want to run a specific test file, you can specify it directly. For example, to run the tests in `test_wallet.py`, you would use:
-
-```bash
-pytest tests/test_wallet.py
-```
-
-Similarly, you can run a specific test within a file by appending `::` and the test name. For example:
-
-```bash
-pytest tests/test_wallet.py::test_create_new_coldkey
-```
-
-### Writing Tests
-
-When writing tests for Bittensor, you should aim to cover both the "happy path" (where everything works as expected) and any potential error conditions. Here's a basic structure for a test file:
-
-```python
-import pytest
-import bittensor
-
-def test_some_functionality():
-    # Setup any necessary objects or state.
-    wallet = bittensor.wallet()
-
-    # Call the function you're testing.
-    result = wallet.create_new_coldkey()
-
-    # Assert that the function behaved as expected.
-    assert result is not None
-```
-
-In this example, we're testing the `create_new_coldkey` function of the `wallet` object. We assert that the result is not `None`, which is the expected behavior.
-
-### Mocking
-
-In some cases, you may need to mock certain functions or objects to isolate the functionality you're testing. Bittensor uses the `unittest.mock` library for this. Here's an example:
-
-```python
-from unittest.mock import MagicMock
-
-def test_some_functionality():
-    # Create a mock object.
-    mock_wallet = MagicMock()
-
-    # Set the return value for a specific function.
-    mock_wallet.create_new_coldkey.return_value = "mocked_key"
-
-    # Call the function you're testing.
-    result = mock_wallet.create_new_coldkey()
-
-    # Assert that the function behaved as expected.
-    assert result == "mocked_key"
-```
-In this example, we're mocking the `create_new_coldkey` function to return a specific value. This allows us to test how our code behaves when `create_new_coldkey` is called, without actually calling the real function.
-
-### Test Coverage
-
-It's important to ensure that your tests cover as much of your code as possible. You can use the `pytest-cov` plugin to measure your test coverage. To use it, first install it with pip:
-
-```bash
-pip install pytest-cov
-```
-
-Then, you can run your tests with coverage like this:
-
-```bash
-pytest --cov=bittensor
-```
-
-This will output a coverage report showing the percentage of your code that's covered by tests.
-
-Remember, while high test coverage is a good goal, it's also important to write meaningful tests. A test isn't very useful if it doesn't accurately represent the conditions under which your code will run.
-
-### Continuous Integration
-
-Bittensor uses GitHub Actions for continuous integration. This means that every time you push changes to the repository, all tests are automatically run. If any tests fail, you'll be notified so you can fix the issue before merging your changes.
-
-You can view the results of these tests in the "Actions" tab of the Bittensor GitHub repository.
-
-Remember, tests are an important part of maintaining the health of a codebase. They help catch issues early and make it easier to add new features or refactor existing code. Happy testing!
-
-
-
-Development Workflow
+Notes for Commit
 ---------
-### Main branches
+### 1. Commit Messages
+Commit messages are crucial as they provide a historical description of the changes. Here are some rules for clear, concise, and useful commit messages:
+
+- Header: The header is a brief summary of changes, usually not more than 50 characters. It should start with a capital letter and do not end with a period.
+
+- Body: The body should include a more detailed explanatory text, if necessary. Wrap it to about 72 characters or so. Explain the problem that this commit is solving and focus on why you are making this change as opposed to how.
+
+- Footer: The footer is often used to reference issue tracker IDs.
+
+`Here's an example of a commit message:`
+```bash
+Short (50 chars or less) summary of changes
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body. The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); tools like rebase can get confused if you run the
+two together.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen or asterisk is used for the bullet, followed by a
+  single space, with blank lines in between, but conventions vary here
+
+Issue #123
+
+```
+
+You can see more details at [here](#style.md/the-six-rules-of-a-great-commit)
+
+### 2. Main branches
 ----------------------
 
 Bittensor is composed of TWO main branches, **master** and **staging**
@@ -526,7 +366,7 @@ Bittensor is composed of TWO main branches, **master** and **staging**
 **staging**
 - staging is Bittensor's development branch. This branch is being continuously updated and merged into. This is the branch where you will propose and merge changes.
 
-### Development model
+### 3. Development model
 ---------------------------
 
 #### Feature branches
@@ -570,7 +410,8 @@ Hotfix branches are very much like release branches in that they are also meant 
 
 The essence is that work of team members, on the `staging` branch, can continue, while another person is preparing a quick production fix.
 
-### Git operations
+### 4. Git operations
+--------------------
 
 #### Create a feature branch
 
@@ -653,4 +494,112 @@ The one exception to the rule here is that, **when a release branch currently ex
 Finally, we remove the temporary branch:
 
 - `git branch -d hotfix/3.3.4/optional-descriptive-message`
+
+
+Notes for Pull Request
+-----------------
+
+You can see how to contribute with PR at [here](CONTRIBUTING.md/#contribution-workflow)
+
+
+Notes for Releasing
+-------------------------
+
+
+- Release Process
+Branch Creation: Create a new branch named `release/VERSION`, where `VERSION` is the new version number.
+
+- Version Update: Within the release branch, update the version by running the versioning script: `./scripts/release/versioning.sh --update UPDATE_TYPE`. The UPDATE_TYPE can be major, minor, or patch.
+
+- Changelog Update: Add release notes to the CHANGELOG by running the script: `./scripts/release/add_notes_changelog.sh -A -V NEW_VERSION -P PREVIOUS_TAG -T GH_ACCESS_TOKEN`. Replace `NEW_VERSION` with the new version number, `PREVIOUS_TAG` with the previous version tag, and `GH_ACCESS_TOKEN` with your GitHub personal access token.
+
+- Testing: Test the release branch thoroughly to ensure it meets all requirements.
+
+- Release: After merging the release branch, run the release script to finalize the release.
+
+### Versioning Script
+
+The versioning script has two options:
+
+- -`U, --update`: Specifies the type of update (major, minor, patch, or rc - release candidate).
+- `-A, --apply:` Applies the release. Without this, the versioning script will only show a dry run without making any changes.
+
+### Release Script
+The release script also has two options:
+
+- -A, --apply: Applies the release. Without this, the release script will only show a dry run without making any changes.
+- -T,--github-token: Your GitHub personal access token, used to interact with the GitHub API.
+
+### Security
+To securely handle your GitHub personal access token, consider using a tool like pass or a similar tool that allows you to store the secret safely and not expose it in the history of the machine you use.
+
+### Release Verification
+After the execution of the release script, verify the release by checking for:
+
+- A new git tag in [github.com](#)
+- A new GitHub release in [github.com](#)
+- A new pip package in [pypi.org](#)
+- A new Docker image in [hub.docker.com](#)
+
+### Post-release Actions
+After a Bittensor release, update [cubit](#) by updating the Dockerfile, building a new Docker image, and pushing it to Docker Hub. The generated name will be the same but with `-cubit` in its name.
+
+For more details, please see [here](#)
+
+
+Notes for Logging
+---------------------------
+
+Logging is a crucial part of any application. It helps developers understand the flow of the program, debug issues, and keep track of events. In Bittensor, we use Python's built-in logging module to handle logging throughout the application.
+
+### Logging Setup
+At the start of your application, you should set up the root logger. This can be done in the main function or entry point of your application. Here's an example of how to set up a basic logger:
+
+```python
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+```
+
+In this example, `logging.basicConfig(level=logging.INFO)` sets up the root logger with a level of INFO. This means the logger will handle all messages of level INFO and above (i.e., WARNING, ERROR, and CRITICAL). You can adjust the level as needed.
+
+`logger = logging.getLogger(__name__)` gets a logger instance that you can use to log messages. The `__name__` variable is used to set the name of the logger to the name of the module, which is a common practice.
+
+### Logging Messages
+
+Once you have a logger instance, you can log messages using the following methods:
+
+- `logger.debug('Debug message')`
+- `logger.info('Info message')`
+- `logger.warning('Warning message')`
+- `logger.error('Error message')`
+- `logger.critical('Critical message')`
+
+Each method corresponds to a level, and the message will be processed by the logger and its handlers based on their levels.
+
+### Logging Variables
+
+You can also log variables by passing them as arguments to the logging method:
+
+```python
+name = 'Bittensor'
+logger.info('Hello, %s', name)
+
+```
+In this example, `%s` is a placeholder for a string, and `name` is the string that will replace the placeholder. This is similar to using the `%` operator for string formatting.
+
+### Logging Exceptions
+
+In addition to standard log messages, you can also log exception information. This is typically done in an exception handler:
+
+```python
+try:
+    1 / 0
+except Exception:
+    logger.exception('An error occurred')
+```
+In this example, `logger.exception('An error occurred')` logs the message 'An error occurred' with level ERROR and adds exception information to the message.
+
 
